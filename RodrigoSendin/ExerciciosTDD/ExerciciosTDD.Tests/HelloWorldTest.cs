@@ -10,8 +10,6 @@ namespace ExerciciosTDD.Tests
             string mensagem = HelloWorld.SayHello();
 
             Assert.AreEqual("Hello, World!", mensagem);
-
-            Console.WriteLine(mensagem);
         }
     }
 }
