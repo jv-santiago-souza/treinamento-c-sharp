@@ -1,3 +1,1 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
-
+﻿Console.WriteLine("Olá! Esse é um projeto novo. Vamos aprender?");
