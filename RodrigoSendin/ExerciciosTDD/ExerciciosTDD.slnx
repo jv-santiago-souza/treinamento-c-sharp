@@ -1,1 +1,4 @@
-<Solution />
+<Solution>
+  <Project Path="ExerciciosTDD.Domain/ExerciciosTDD.Domain.csproj" />
+  <Project Path="ExerciciosTDD.Tests/ExerciciosTDD.Tests.csproj" />
+</Solution>
