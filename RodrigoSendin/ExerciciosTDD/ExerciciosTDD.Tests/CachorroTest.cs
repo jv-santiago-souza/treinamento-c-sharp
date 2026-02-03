@@ -31,7 +31,7 @@ namespace ExerciciosTDD.Tests
         public void Yuri_QuantoDevoComer_Test()
         {
             Cachorro yuri = new Cachorro();
-            string quantoDevoComer = yuri.QuantoDevoComer(1);
+            string quantoDevoComer = yuri.QuantoDevoComer(15);
 
             Console.WriteLine(quantoDevoComer);
 
@@ -42,7 +42,7 @@ namespace ExerciciosTDD.Tests
         public void Tequila_QuantoDevoComer_Test()
         {
             Cachorro tequila = new Cachorro();
-            string quantoDevoComer = tequila.QuantoDevoComer(1);
+            string quantoDevoComer = tequila.QuantoDevoComer(30);
 
             Console.WriteLine(quantoDevoComer);
 

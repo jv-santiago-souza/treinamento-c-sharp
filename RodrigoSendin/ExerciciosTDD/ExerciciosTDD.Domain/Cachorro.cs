@@ -9,9 +9,9 @@ namespace ExerciciosTDD.Domain
             return "Au Au!";
         }
 
-        public string QuantoDevoComer(int peso)
+        public string QuantoDevoComer(int pesoKg) // Método para 5% do peso (em kg) do cachorro em gramas de ração por dia
         {
-            return $"como tenho {peso}kg, devo comer {peso * 50}g por dia";
+            return $"como tenho {pesoKg}kg, devo comer {pesoKg * 50}g por dia"; // 50g por kg(1000 * 5%);
         }
     }
 }
