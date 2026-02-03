@@ -61,5 +61,70 @@ namespace ExerciciosTDD.Tests
 
             Assert.AreEqual("Yuri", nome);
         }
+
+        [TestMethod]
+        public void Set_Get_Sexo_Test()
+        {
+            Cachorro yuri = new Cachorro();
+
+            yuri.setSexo("Macho");
+            string sexo = yuri.getSexo();
+
+            Console.WriteLine(sexo);
+
+            Assert.AreEqual("Macho", sexo);
+        }
+
+        [TestMethod]
+        public void Set_Get_Raca_Test()
+        {
+            Cachorro yuri = new Cachorro();
+
+            yuri.setRaca("Bulldog");
+            string raca = yuri.getRaca();
+
+            Console.WriteLine(raca);
+
+            Assert.AreEqual("Bulldog", raca);
+        }
+
+        [TestMethod]
+        public void Set_Get_Porte_Test()
+        {
+            Cachorro yuri = new Cachorro();
+
+            yuri.setPorte("Médio");
+            string porte = yuri.getPorte();
+
+            Console.WriteLine(porte);
+
+            Assert.AreEqual("Médio", porte);
+        }
+
+        [TestMethod]
+        public void Set_Get_Idade_Test()
+        {
+            Cachorro yuri = new Cachorro();
+
+            yuri.setIdade(2);
+            int idade = yuri.getIdade();
+
+            Console.WriteLine(idade);
+
+            Assert.AreEqual(2, idade);
+        }
+
+        [TestMethod]
+        public void Set_Get_Peso_Test()
+        {
+            Cachorro yuri = new Cachorro();
+
+            yuri.setPeso(15);
+            double peso = yuri.getPeso();
+
+            Console.WriteLine(peso);
+
+            Assert.AreEqual(15, peso);
+        }
     }
 }
