@@ -1,6 +1,4 @@
-﻿
-
-
+﻿using System.Text;
 
 namespace ExerciciosTDD.Domain
 {
@@ -78,10 +76,30 @@ namespace ExerciciosTDD.Domain
         private double _peso;
         #endregion
 
-
-        public string Latir()
+        #region Vacinado
+        public void setVacinado(bool vacinado)
         {
-            return "Au Au!";
+            _vacinado = vacinado;
+        }
+        public bool getVacinado()
+        {
+            return _vacinado;
+        }
+        private bool _vacinado;
+        #endregion
+
+
+        public string Latir(short qtdeLatidos)
+        {
+            string latido = "Au! ";
+
+            StringBuilder builder = new StringBuilder(latido.Length * qtdeLatidos);
+            for (int i = 0; i < qtdeLatidos; i++)
+            {
+                builder.Append(latido);
+            }
+
+            return builder.ToString();
         }
 
         public string QuantoDevoComer(int pesoKg) // Método para 5% do peso (em kg) do cachorro em gramas de ração por dia
