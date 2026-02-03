@@ -1,0 +1,19 @@
+#Aprendendo sobre a compilação e upload de arquivos com Visual Studio e Git no mundo do C# :)
+
+# Pastas de compilação
+bin/
+obj/
+
+# Arquivos do próprio Visual Studio que são locais
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Arquivos de publicação e pacotes
+publish/
+*.nupkg
+
+# Outros arquivos temporários
+*.log
