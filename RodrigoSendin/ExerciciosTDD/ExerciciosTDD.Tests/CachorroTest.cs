@@ -48,5 +48,18 @@ namespace ExerciciosTDD.Tests
 
             Assert.AreEqual("como tenho 30kg, devo comer 1500g por dia", quantoDevoComer);
         }
+
+        [TestMethod]
+        public void Set_Get_Nome_Test()
+        {
+            Cachorro yuri = new Cachorro();
+
+            yuri.setNome("Yuri");
+            string nome = yuri.getNome();
+
+            Console.WriteLine(nome);
+
+            Assert.AreEqual("Yuri", nome);
+        }
     }
 }
