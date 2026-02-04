@@ -5,54 +5,81 @@ namespace ExerciciosTDD.Domain
     public class Cachorro
     {
         #region Nome
-        public void setNome(string nome)
-        {
-            _nome = nome;
-        }
-        public string getNome()
-        {
-            return _nome;
-        }
-        private string _nome;
+
+        public string? Nome { set; get; }
+
+        //public void setNome(string nome)
+        //{
+        //    _nome = nome;
+        //}
+        //public string getNome()
+        //{
+        //    return _nome;
+        //}
+        //private string _nome;
         #endregion
 
         #region Sexo
-        public void setSexo(string sexo)
-        {
-            _sexo = sexo;
-        }
-        public string getSexo()
-        {
-            return _sexo;
-        }
-        private string _sexo;
+
+        public string? Sexo { set; get; }
+
+        //public void setSexo(string sexo)
+        //{
+        //    _sexo = sexo;
+        //}
+        //public string getSexo()
+        //{
+        //    return _sexo;
+        //}
+        //private string _sexo;
         #endregion
 
         #region Raça
-        public void setRaca(string raca)
-        {
-            _raca = raca;
-        }
-        public string getRaca()
-        {
-            return _raca;
-        }
-        private string _raca;
+
+        // Propriedades, por convenção, são publicas e começam com letra maiúscula
+        // Abaixo, temos a estrutura de uma propriedade em C#
+        // Para ter uma propriedade, ainda precisamos de um campo privado para armazenar o valor (atributo)
+
+        // Estrutura antiga
+        //public string Raca
+        //{
+        //    get { return _raca; }
+        //    set { _raca = value; }
+        //}
+
+        public string? Raca { set; get; } // Posso passar um Privatete para o set, ou seja, read-only de fora.
+                                          // Também dá pra incluir apenas um dos dois, ou get, ou set, para ter uma propriedade de apenas leitura ou escrita.
+
+        //public void setRaca(string raca)
+        //{
+        //    _raca = raca;
+        //}
+        //public string getRaca()
+        //{
+        //    return _raca;
+        //}
+        //private string? _raca;
         #endregion
 
         #region Porte
-        public void setPorte(string porte)
-        {
-            _porte = porte;
-        }
-        public string getPorte()
-        {
-            return _porte;
-        }
-        private string _porte;
+
+        public string? Porte { set; get; }
+
+        //public void setPorte(string porte)
+        //{
+        //    _porte = porte;
+        //}
+        //public string getPorte()
+        //{
+        //    return _porte;
+        //}
+        //private string _porte;
         #endregion
 
         #region Idade
+
+        public string? Idade { set; get; }
+
         public void setIdade(int idade)
         {
             _idade = idade;
@@ -65,6 +92,9 @@ namespace ExerciciosTDD.Domain
         #endregion
 
         #region Peso
+
+        public string? Peso { set; get; }
+
         public void setPeso(double peso)
         {
             _peso = peso;
@@ -77,6 +107,9 @@ namespace ExerciciosTDD.Domain
         #endregion
 
         #region Vacinado
+
+        public string? Vacinado { set; get; }
+
         public void setVacinado(bool vacinado)
         {
             _vacinado = vacinado;

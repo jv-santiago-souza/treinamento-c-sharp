@@ -54,8 +54,8 @@ namespace ExerciciosTDD.Tests
         {
             Cachorro yuri = new Cachorro();
 
-            yuri.setNome("Yuri");
-            var nome = yuri.getNome();
+            yuri.Nome = "Yuri";
+            var nome = yuri.Nome;
 
             Console.WriteLine(nome);
 
@@ -67,8 +67,8 @@ namespace ExerciciosTDD.Tests
         {
             Cachorro yuri = new Cachorro();
 
-            yuri.setSexo("Macho");
-            var sexo = yuri.getSexo();
+            yuri.Sexo = "Macho";
+            var sexo = yuri.Sexo;
 
             Console.WriteLine(sexo);
 
@@ -80,8 +80,8 @@ namespace ExerciciosTDD.Tests
         {
             Cachorro yuri = new Cachorro();
 
-            yuri.setRaca("Bulldog");
-            var raca = yuri.getRaca();
+            yuri.Raca = "Bulldog";
+            var raca = yuri.Raca;
 
             Console.WriteLine(raca);
 
@@ -93,8 +93,8 @@ namespace ExerciciosTDD.Tests
         {
             Cachorro yuri = new Cachorro();
 
-            yuri.setPorte("Médio");
-            var porte = yuri.getPorte();
+            yuri.Porte = "Médio";
+            var porte = yuri.Porte;
 
             Console.WriteLine(porte);
 
