@@ -48,9 +48,8 @@ namespace ExerciciosTDD.Domain
         //    set { _raca = value; }
         //}
 
-        public string? Raca { set; get; } // Posso passar um Privatete para o set, ou seja, read-only de fora.
+        public Raca Raca { set; get; } // Posso passar um Privatete para o set, ou seja, read-only de fora.
                                           // Também dá pra incluir apenas um dos dois, ou get, ou set, para ter uma propriedade de apenas leitura ou escrita.
-
         //public void setRaca(string raca)
         //{
         //    _raca = raca;

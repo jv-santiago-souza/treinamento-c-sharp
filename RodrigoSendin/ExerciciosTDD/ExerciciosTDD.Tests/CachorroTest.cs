@@ -80,12 +80,12 @@ namespace ExerciciosTDD.Tests
         {
             Cachorro yuri = new Cachorro();
 
-            yuri.Raca = "Bulldog";
+            yuri.Raca = new Raca { Nome = "Bulldog" };
             var raca = yuri.Raca;
 
-            Console.WriteLine(raca);
+            Console.WriteLine(raca.Nome);
 
-            Assert.AreEqual("Bulldog", raca);
+            Assert.AreEqual("Bulldog", raca.Nome);
         }
 
         [TestMethod]
@@ -189,7 +189,15 @@ namespace ExerciciosTDD.Tests
         [TestMethod]
         public void Cachorro_Associacao_Raca_Test()
         {
-            var labrador = new Raca { nome = "Labrador" };
+            var labrador = new Raca { Nome = "Labrador" }; // Instanciou a raça
+
+            var tequila = new Cachorro { Nome = "Tequila", Raca = labrador }; // Associou a raça ao cachorro
+                                                                              // tipo dela mudou nas associações de propriedade na classe Cachorro, antes era string agora é Raca
+
+            Console.WriteLine(tequila.Raca.Nome);
+
+            Assert.AreEqual("Labrador", tequila.Raca.Nome);
+
         }
     }
 }
