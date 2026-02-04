@@ -91,10 +91,12 @@ namespace ExerciciosTDD.Domain
 
         public string Latir(short qtdeLatidos)
         {
-            string latido = "Au! ";
+            if (qtdeLatidos <= 0) return string.Empty;
 
-            StringBuilder builder = new StringBuilder(latido.Length * qtdeLatidos);
-            for (int i = 0; i < qtdeLatidos; i++)
+            var latido = "Au! ";
+            var builder = new StringBuilder();
+
+            for (var i = 0; i < qtdeLatidos; i++)
             {
                 builder.Append(latido);
             }

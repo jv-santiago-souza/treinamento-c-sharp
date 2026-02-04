@@ -9,18 +9,18 @@ namespace ExerciciosTDD.Tests
         public void Latir_Test()
         {
             Cachorro belinha = new Cachorro();
-            string latido = belinha.Latir();
+            var latido = belinha.Latir(5);
 
             Console.WriteLine(latido);
 
-            Assert.AreEqual("Au Au!", latido);
+            Assert.AreEqual("Au! Au! Au! Au! Au! ", latido);
         }
 
         [TestMethod]
         public void Belinha_QuantoDevoComer_Test()
         {
             Cachorro belinha = new Cachorro();
-            string quantoDevoComer = belinha.QuantoDevoComer(1);
+            var quantoDevoComer = belinha.QuantoDevoComer(1);
 
             Console.WriteLine(quantoDevoComer);
 
@@ -31,7 +31,7 @@ namespace ExerciciosTDD.Tests
         public void Yuri_QuantoDevoComer_Test()
         {
             Cachorro yuri = new Cachorro();
-            string quantoDevoComer = yuri.QuantoDevoComer(15);
+            var quantoDevoComer = yuri.QuantoDevoComer(15);
 
             Console.WriteLine(quantoDevoComer);
 
@@ -42,7 +42,7 @@ namespace ExerciciosTDD.Tests
         public void Tequila_QuantoDevoComer_Test()
         {
             Cachorro tequila = new Cachorro();
-            string quantoDevoComer = tequila.QuantoDevoComer(30);
+            var quantoDevoComer = tequila.QuantoDevoComer(30);
 
             Console.WriteLine(quantoDevoComer);
 
@@ -55,7 +55,7 @@ namespace ExerciciosTDD.Tests
             Cachorro yuri = new Cachorro();
 
             yuri.setNome("Yuri");
-            string nome = yuri.getNome();
+            var nome = yuri.getNome();
 
             Console.WriteLine(nome);
 
@@ -68,7 +68,7 @@ namespace ExerciciosTDD.Tests
             Cachorro yuri = new Cachorro();
 
             yuri.setSexo("Macho");
-            string sexo = yuri.getSexo();
+            var sexo = yuri.getSexo();
 
             Console.WriteLine(sexo);
 
@@ -81,7 +81,7 @@ namespace ExerciciosTDD.Tests
             Cachorro yuri = new Cachorro();
 
             yuri.setRaca("Bulldog");
-            string raca = yuri.getRaca();
+            var raca = yuri.getRaca();
 
             Console.WriteLine(raca);
 
@@ -94,7 +94,7 @@ namespace ExerciciosTDD.Tests
             Cachorro yuri = new Cachorro();
 
             yuri.setPorte("Médio");
-            string porte = yuri.getPorte();
+            var porte = yuri.getPorte();
 
             Console.WriteLine(porte);
 
@@ -107,7 +107,7 @@ namespace ExerciciosTDD.Tests
             Cachorro yuri = new Cachorro();
 
             yuri.setIdade(2);
-            int idade = yuri.getIdade();
+            var idade = yuri.getIdade();
 
             Console.WriteLine(idade);
 
@@ -120,11 +120,24 @@ namespace ExerciciosTDD.Tests
             Cachorro yuri = new Cachorro();
 
             yuri.setPeso(15);
-            double peso = yuri.getPeso();
+            var peso = yuri.getPeso();
 
             Console.WriteLine(peso);
 
             Assert.AreEqual(15, peso);
+        }
+
+        [TestMethod]
+        public void Set_Get_Vacinado_Test()
+        {
+            Cachorro yuri = new Cachorro();
+
+            yuri.setVacinado(true);
+            var vacinado = yuri.getVacinado();
+
+            Console.WriteLine(vacinado);
+
+            Assert.IsTrue(vacinado);
         }
     }
 }
