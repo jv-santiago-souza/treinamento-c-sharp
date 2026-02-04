@@ -154,5 +154,64 @@ namespace ExerciciosTDD.Tests
             Console.WriteLine(dif.TotalSeconds);
             Console.WriteLine(dif.TotalHours);
         }
+
+        [TestMethod]
+        public void Array_While_Test()
+        {
+            var array = new int[3];
+            array[0] = 10;
+            array[1] = 20;
+            array[2] = 30;
+
+            var i = 0;
+            while (i < array.Length)
+            {
+                Console.WriteLine(array[i]);
+                i++;
+            }
+        }
+
+        [TestMethod]
+        public void Array_Do_While_Test()
+        {
+            var array = new string[] { "Eu", "Tu", "Nós" };
+
+            var i = 0;
+            do
+            {
+                Console.WriteLine(array[i]);
+                i++;
+            } while (i < array.Length);
+        }
+
+        [TestMethod]
+        public void Array_For_Test()
+        {
+            var array = new[] { 1.1, 2.2, 3.3, 4.4 };
+
+            for (var i = 0; i < array.Length; i++)
+                Console.WriteLine(array[i]);
+        }
+
+        [TestMethod]
+        public void Array_For_Invertido_Test()
+        {
+            var array = new[] { 1.1, 2.2, 3.3, 4.4 };
+
+            for (var i = array.Length - 1; i >= 0; i--)
+                Console.WriteLine(array[i]);
+        }
+
+        [TestMethod]
+        public void Array_Foreach_Test()
+        {
+            var array = new[] { 1.1, 2.2, 3.3, 4.4 };
+
+            var lista = new List<string> { "A", "B", "C" };
+
+            foreach (var item in array)
+                Console.WriteLine(array[(int)item]);
+        }
     }
 }
+ 
