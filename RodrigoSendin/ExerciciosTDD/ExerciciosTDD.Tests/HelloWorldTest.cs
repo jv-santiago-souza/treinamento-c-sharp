@@ -210,7 +210,40 @@ namespace ExerciciosTDD.Tests
             var lista = new List<string> { "A", "B", "C" };
 
             foreach (var item in array)
-                Console.WriteLine(array[(int)item]);
+                Console.WriteLine(item);
+        }
+
+        [TestMethod]
+        public void Exception_Test()
+        {
+            try
+            {
+                MinhaClasse obj = null;
+                // obj.OutroMetodo();
+
+                if(obj == null)
+                {
+                    throw new Exception("O objeto não foi instanciado"); // Força a exceção
+                }
+
+                var x = 10;
+                var y = 0;
+
+                var resultado = x / y;
+                Console.WriteLine(resultado);
+            }
+            catch (DivideByZeroException)
+            {
+                Console.WriteLine("Ocorreu um erro ao tentar dividir por zero!");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Ocorreu um erro: " + ex.Message);
+            }
+            finally
+            {
+                Console.WriteLine("Mensagem enviado pela finally. Aparece mesmo que ocorra uma Exception");
+            }
         }
     }
 }

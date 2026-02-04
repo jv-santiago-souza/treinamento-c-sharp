@@ -157,5 +157,39 @@ namespace ExerciciosTDD.Tests
 
             Console.WriteLine(idade);
         }
+
+        [TestMethod]
+        public void Cachorro_Validar_Test()
+        {
+            try
+            {
+                Cachorro cachorro = new()
+                {
+                    Sexo = "Xyz",
+                    DataNascimento = DateTime.Today.AddMonths(1).ToString("dd/MM/yyyy"),
+                    Peso = 0
+                };
+
+                cachorro.Validar();
+
+                Assert.Fail();
+            }
+            catch (Exception ex)
+            {
+                var ok = ex.Message.Contains("Inserir o nome do cachorro é obrigatório.") &&
+                         ex.Message.Contains("Sexo do cachorro deve ser Macho ou Fêmea.") &&
+                         ex.Message.Contains("A data de nascimento do cachorro não pode ser no futuro.") &&
+                         ex.Message.Contains("O peso não pode ser menor ou igual a zero.");
+
+                Assert.AreEqual(true, ok);
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+        [TestMethod]
+        public void Cachorro_Associacao_Raca_Test()
+        {
+            var labrador = new Raca { nome = "Labrador" };
+        }
     }
 }

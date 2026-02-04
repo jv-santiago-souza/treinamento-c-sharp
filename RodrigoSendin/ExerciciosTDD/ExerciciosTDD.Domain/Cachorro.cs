@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Security.Cryptography.X509Certificates;
+using System.Text;
 
 namespace ExerciciosTDD.Domain
 {
@@ -80,7 +81,7 @@ namespace ExerciciosTDD.Domain
 
         #region Peso
 
-        public string? Peso { set; get; }
+        public double Peso { set; get; }
 
         public void setPeso(double peso)
         {
@@ -168,5 +169,30 @@ namespace ExerciciosTDD.Domain
             }
         }
 
+        public void Validar()
+        {
+            var mensagens = new List<string>();
+
+            if (string.IsNullOrWhiteSpace(Nome)) // Verificação do nome vazio
+                mensagens.Add("Inserir o nome do cachorro é obrigatório.");
+
+            if (Sexo != "Macho" && Sexo != "Fêmea") // Verificação do sexo
+                mensagens.Add("Sexo do cachorro deve ser Macho ou Fêmea.");
+            
+            if (DateTime.Parse(DataNascimento) > DateTime.Today) // Verificação da data de nascimento
+                mensagens.Add("A data de nascimento do cachorro não pode ser no futuro.");
+
+            if (Peso <= 0) // Verificação do peso
+                mensagens.Add("O peso não pode ser menor ou igual a zero.");
+
+            if (mensagens.Count > 0)
+            {
+                var exceptionMessage = "";
+                foreach (var msg in mensagens)
+                    exceptionMessage += msg + Environment.NewLine;
+
+                throw new Exception(exceptionMessage.Trim());
+            }
+        }
     }
 }
