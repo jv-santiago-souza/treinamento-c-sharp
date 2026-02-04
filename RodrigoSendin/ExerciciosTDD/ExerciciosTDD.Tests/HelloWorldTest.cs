@@ -36,5 +36,10 @@ namespace ExerciciosTDD.Tests
         //    Assert.AreEqual(cachorro1, cachorro2);
         //}
 
+        [TestMethod]
+        public void MinhaClasse_Test()
+        {
+            var obj = new MinhaClasse();
+        }
     }
 }
