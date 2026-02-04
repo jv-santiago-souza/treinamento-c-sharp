@@ -76,20 +76,7 @@ namespace ExerciciosTDD.Domain
         //private string _porte;
         #endregion
 
-        #region Idade
-
-        public string? Idade { set; get; }
-
-        public void setIdade(int idade)
-        {
-            _idade = idade;
-        }
-        public int getIdade()
-        {
-            return _idade;
-        }
-        private int _idade;
-        #endregion
+        public string? DataNascimento { set; get; }
 
         #region Peso
 
@@ -141,5 +128,45 @@ namespace ExerciciosTDD.Domain
         {
             return $"como tenho {pesoKg}kg, devo comer {pesoKg * 50}g por dia"; // 50g por kg(1000 * 5%);
         }
+
+        public static string IdadeCachorro(string dataNascimento)
+        {
+            var dataAtual = DateTime.Today;
+            var dataNascConvertido = DateTime.Parse(dataNascimento);
+
+            var mesesTotais = ((dataAtual.Year - dataNascConvertido.Year) * 12) + dataAtual.Month - dataNascConvertido.Month;
+
+            if (mesesTotais < 0) // Data de nascimento no futuro; impossível NESSE contexto
+            {
+                return "Data de nascimento inválida";
+            }
+
+            // Se o dia do mês atual for menor que o dia de nascimento, ainda não completou o mês
+            if (dataAtual.Day < dataNascConvertido.Day) mesesTotais --;
+
+            if (mesesTotais < 12)
+
+                if (mesesTotais == 0)
+                {
+                    return "Tenho menos de 1 mês";
+                }
+                else
+
+                {
+                return mesesTotais == 1 ? "Tenho 1 mês" : $"Tenho {mesesTotais} meses";
+            }
+
+            int anos = mesesTotais / 12;
+
+            if (anos == 1)
+            {
+                return $"Tenho {anos} ano";
+            }
+            else
+            {
+                return $"Tenho {anos} anos";
+            }
+        }
+
     }
 }

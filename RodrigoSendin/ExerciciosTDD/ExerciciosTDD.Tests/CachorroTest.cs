@@ -101,17 +101,26 @@ namespace ExerciciosTDD.Tests
             Assert.AreEqual("Médio", porte);
         }
 
+        //[TestMethod]
+        //public void Set_Get_Idade_Test()
+        //{
+        //    Cachorro yuri = new Cachorro();
+
+        //    yuri.setIdade(2);
+        //    var idade = yuri.getIdade();
+
+        //    Console.WriteLine(idade);
+
+        //    Assert.AreEqual(2, idade);
+        //}
+
         [TestMethod]
-        public void Set_Get_Idade_Test()
+        public void Set_Get_DataNascimento_Test()
         {
             Cachorro yuri = new Cachorro();
 
-            yuri.setIdade(2);
-            var idade = yuri.getIdade();
-
-            Console.WriteLine(idade);
-
-            Assert.AreEqual(2, idade);
+            yuri.DataNascimento = "";
+            var idade = yuri.DataNascimento;
         }
 
         [TestMethod]
@@ -138,6 +147,15 @@ namespace ExerciciosTDD.Tests
             Console.WriteLine(vacinado);
 
             Assert.IsTrue(vacinado);
+        }
+
+        [TestMethod]
+        public void Set_Get_DataNascimento_Test2()
+        {
+            Cachorro yuri = new Cachorro();
+            var idade = Cachorro.IdadeCachorro("04/12/2025");
+
+            Console.WriteLine(idade);
         }
     }
 }
