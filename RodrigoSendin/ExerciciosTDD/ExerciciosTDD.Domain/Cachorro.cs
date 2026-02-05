@@ -2,7 +2,7 @@
 
 namespace ExerciciosTDD.Domain
 {
-    public class Cachorro
+    public class Cachorro : IPet
     {
         #region Nome
 
@@ -48,16 +48,16 @@ namespace ExerciciosTDD.Domain
         //}
 
         public Raca? Raca { set; get; } // Posso passar um Privatete para o set, ou seja, read-only de fora.
-                                          // Também dá pra incluir apenas um dos dois, ou get, ou set, para ter uma propriedade de apenas leitura ou escrita.
-        //public void setRaca(string raca)
-        //{
-        //    _raca = raca;
-        //}
-        //public string getRaca()
-        //{
-        //    return _raca;
-        //}
-        //private string? _raca;
+                                        // Também dá pra incluir apenas um dos dois, ou get, ou set, para ter uma propriedade de apenas leitura ou escrita.
+                                        //public void setRaca(string raca)
+                                        //{
+                                        //    _raca = raca;
+                                        //}
+                                        //public string getRaca()
+                                        //{
+                                        //    return _raca;
+                                        //}
+                                        //private string? _raca;
         #endregion
 
         #region Porte
@@ -97,6 +97,8 @@ namespace ExerciciosTDD.Domain
         #region Vacinado
 
         public string? Vacinado { set; get; }
+
+        public string Foto { get; set; }
 
         public void setVacinado(bool vacinado)
         {
@@ -143,7 +145,7 @@ namespace ExerciciosTDD.Domain
             }
 
             // Se o dia do mês atual for menor que o dia de nascimento, ainda não completou o mês
-            if (dataAtual.Day < dataNascConvertido.Day) mesesTotais --;
+            if (dataAtual.Day < dataNascConvertido.Day) mesesTotais--;
 
             if (mesesTotais < 12)
 
@@ -154,8 +156,8 @@ namespace ExerciciosTDD.Domain
                 else
 
                 {
-                return mesesTotais == 1 ? "Tenho 1 mês" : $"Tenho {mesesTotais} meses";
-            }
+                    return mesesTotais == 1 ? "Tenho 1 mês" : $"Tenho {mesesTotais} meses";
+                }
 
             int anos = mesesTotais / 12;
 
@@ -199,6 +201,16 @@ namespace ExerciciosTDD.Domain
 
                 throw new Exception(exceptionMessage.Trim());
             }
+        }
+
+        public string quantoDevoComer(int pesoKg)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void validar()
+        {
+            throw new NotImplementedException();
         }
     }
 }

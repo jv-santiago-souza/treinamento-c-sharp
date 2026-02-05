@@ -222,5 +222,20 @@ namespace ExerciciosTDD.Tests
             Console.WriteLine(teodoro.Sexo);
             Assert.AreEqual(Sexo.Macho, teodoro.Sexo);
         }
+
+        [TestMethod]
+        public void Cachorro_IPet_Test()
+        {
+            IPet pet = new Cachorro { Nome = "Léia", Peso = 0 };
+
+            Assert.AreEqual("Léia", pet.Nome);
+            Console.WriteLine(pet.Nome);
+
+            var leia = pet as Cachorro; // casting para acessar a propriedade Peso. Conversão de IPet para Cachorro
+
+            Assert.IsNotNull(leia);
+            Assert.AreEqual(0, leia.Peso);
+            Console.WriteLine(leia.Peso);
+        }
     }
 }

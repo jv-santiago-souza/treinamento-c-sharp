@@ -1,8 +1,4 @@
-﻿
-
-
-
-namespace ExerciciosTDD.Domain
+﻿namespace ExerciciosTDD.Domain
 {
     public class Dono
     {
@@ -10,19 +6,19 @@ namespace ExerciciosTDD.Domain
         public string Telefone { get; set; }
         public string Email { get; set; }
 
-        public List<Cachorro> Pets { get; set; } // Associação 1:N (um dono pode ter vários cachorros)
+        public List<IPet> Pets { get; set; } // Associação 1:N (um dono pode ter vários * pets *)
 
-        public void AddPet(Cachorro pet)
+        public void AddPet(IPet pet)
         {
             if (Pets == null)
-                Pets = new List<Cachorro>();
+                Pets = new List<IPet>();
             
             Pets.Add(pet);
 
             pet.Dono = this; // Estabelece a relação bidirecional
         }
 
-        public void AddPet(params Cachorro[] pets)
+        public void AddPet(params IPet[] pets)
         {
             foreach (var pet in pets)
             {
@@ -30,7 +26,7 @@ namespace ExerciciosTDD.Domain
             }
         }
 
-        public void RemovePet(Cachorro pet)
+        public void RemovePet(IPet pet)
         {
             if (Pets == null)
                 return;
@@ -39,11 +35,11 @@ namespace ExerciciosTDD.Domain
                 pet.Dono = null; // Remove a relação bidirecional
         }
 
-        public void RemovePet(params Cachorro[] pets)
+        public void RemovePet(params IPet[] pets)
         {
             foreach (var pet in pets)
             {
-                AddPet(pet);
+                RemovePet(pet);
             }
         }
     }
