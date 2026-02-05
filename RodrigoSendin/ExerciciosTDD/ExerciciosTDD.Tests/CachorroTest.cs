@@ -1,4 +1,5 @@
-﻿using ExerciciosTDD.Domain;
+﻿using System.Linq;
+using ExerciciosTDD.Domain;
 
 namespace ExerciciosTDD.Tests
 {
@@ -67,12 +68,12 @@ namespace ExerciciosTDD.Tests
         {
             Cachorro yuri = new Cachorro();
 
-            yuri.Sexo = "Macho";
+            yuri.Sexo = Sexo.Macho;
             var sexo = yuri.Sexo;
 
             Console.WriteLine(sexo);
 
-            Assert.AreEqual("Macho", sexo);
+            Assert.AreEqual(Sexo.Macho, sexo);
         }
 
         [TestMethod]
@@ -93,12 +94,12 @@ namespace ExerciciosTDD.Tests
         {
             Cachorro yuri = new Cachorro();
 
-            yuri.Porte = "Médio";
+            yuri.Porte = Raca.Porte.Medio;
             var porte = yuri.Porte;
 
             Console.WriteLine(porte);
 
-            Assert.AreEqual("Médio", porte);
+            Assert.AreEqual(Raca.Porte.Medio, porte);
         }
 
         //[TestMethod]
@@ -163,9 +164,11 @@ namespace ExerciciosTDD.Tests
         {
             try
             {
+                var sexoInvalido = (Sexo)(Enum.GetValues(typeof(Sexo)).Cast<int>().Max() + 1);
+
                 Cachorro cachorro = new()
                 {
-                    Sexo = "Xyz",
+                    Sexo = sexoInvalido,
                     DataNascimento = DateTime.Today.AddMonths(1).ToString("dd/MM/yyyy"),
                     Peso = 0
                 };
@@ -181,7 +184,7 @@ namespace ExerciciosTDD.Tests
                          ex.Message.Contains("A data de nascimento do cachorro não pode ser no futuro.") &&
                          ex.Message.Contains("O peso não pode ser menor ou igual a zero.");
 
-                Assert.AreEqual(true, ok);
+                Assert.IsTrue(ok);
                 Console.WriteLine(ex.Message);
             }
         }
@@ -198,6 +201,26 @@ namespace ExerciciosTDD.Tests
 
             Assert.AreEqual("Labrador", tequila.Raca.Nome);
 
+        }
+
+        [TestMethod]
+        public void Cachorro_Associacao_Dono_Test()
+        {
+            var roberto = new ExerciciosTDD.Domain.Dono { Nome = "Roberto", Telefone = "18912345678", Email = "teste@emaildodono.com" };
+
+            var liedson = new Cachorro { Nome = "Liedson", Raca = new Raca { Nome = "Vira Lata" }, Dono = roberto };
+
+            Console.WriteLine(liedson.Dono.Nome);
+            Assert.AreEqual("Roberto", liedson.Dono.Nome);
+        }
+
+        [TestMethod]
+        public void Cachorro_Enum_Sexo_Test()
+        {
+            var teodoro = new Cachorro { Nome = "Teodoro", Sexo = Sexo.Macho };
+
+            Console.WriteLine(teodoro.Sexo);
+            Assert.AreEqual(Sexo.Macho, teodoro.Sexo);
         }
     }
 }

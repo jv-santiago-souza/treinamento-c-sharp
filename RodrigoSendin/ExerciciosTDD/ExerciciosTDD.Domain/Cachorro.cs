@@ -1,5 +1,4 @@
-﻿using System.Security.Cryptography.X509Certificates;
-using System.Text;
+﻿using System.Text;
 
 namespace ExerciciosTDD.Domain
 {
@@ -22,7 +21,7 @@ namespace ExerciciosTDD.Domain
 
         #region Sexo
 
-        public string? Sexo { set; get; }
+        public Sexo Sexo { set; get; }
 
         //public void setSexo(string sexo)
         //{
@@ -48,7 +47,7 @@ namespace ExerciciosTDD.Domain
         //    set { _raca = value; }
         //}
 
-        public Raca Raca { set; get; } // Posso passar um Privatete para o set, ou seja, read-only de fora.
+        public Raca? Raca { set; get; } // Posso passar um Privatete para o set, ou seja, read-only de fora.
                                           // Também dá pra incluir apenas um dos dois, ou get, ou set, para ter uma propriedade de apenas leitura ou escrita.
         //public void setRaca(string raca)
         //{
@@ -63,7 +62,7 @@ namespace ExerciciosTDD.Domain
 
         #region Porte
 
-        public string? Porte { set; get; }
+        public Raca.Porte Porte { set; get; }
 
         //public void setPorte(string porte)
         //{
@@ -77,6 +76,8 @@ namespace ExerciciosTDD.Domain
         #endregion
 
         public string? DataNascimento { set; get; }
+
+        public Dono? Dono { set; get; }
 
         #region Peso
 
@@ -175,11 +176,17 @@ namespace ExerciciosTDD.Domain
             if (string.IsNullOrWhiteSpace(Nome)) // Verificação do nome vazio
                 mensagens.Add("Inserir o nome do cachorro é obrigatório.");
 
-            if (Sexo != "Macho" && Sexo != "Fêmea") // Verificação do sexo
+            if (Sexo != Sexo.Macho && Sexo != Sexo.Femea) // Verificação do sexo
                 mensagens.Add("Sexo do cachorro deve ser Macho ou Fêmea.");
-            
-            if (DateTime.Parse(DataNascimento) > DateTime.Today) // Verificação da data de nascimento
+
+            if (string.IsNullOrWhiteSpace(DataNascimento) || !DateTime.TryParse(DataNascimento, out var dataNascimentoParsed)) // Verificação da data de nascimento
+            {
+                mensagens.Add("A data de nascimento do cachorro é obrigatória e deve ser uma data válida.");
+            }
+            else if (dataNascimentoParsed > DateTime.Today) // Verificação da data de nascimento
+            {
                 mensagens.Add("A data de nascimento do cachorro não pode ser no futuro.");
+            }
 
             if (Peso <= 0) // Verificação do peso
                 mensagens.Add("O peso não pode ser menor ou igual a zero.");

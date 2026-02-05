@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="ExerciciosTDD.Domain.Cachorro">
+    <Position X="0.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BCTAAAEAAABAQAAAgAAgAAIAAAIAUQQAAAAAAAEAAAA=</HashCode>
+      <FileName>Cachorro.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Raca" />
+      <Property Name="Sexo" />
+      <Property Name="Dono" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="ExerciciosTDD.Domain.Raca">
+    <Position X="3" Y="0.5" Width="1.5" />
+    <NestedTypes>
+      <Enum Name="ExerciciosTDD.Domain.Raca.Porte" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Raca.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>Raca.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ExerciciosTDD.Domain.Dono">
+    <Position X="3.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAgCAAAQAEgAAAAAAAAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>Dono.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Pets" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Enum Name="ExerciciosTDD.Domain.Sexo">
+    <Position X="3" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAACAAAACAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sexo.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
