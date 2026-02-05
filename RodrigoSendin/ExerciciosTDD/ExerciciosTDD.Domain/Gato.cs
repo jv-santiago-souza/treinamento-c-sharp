@@ -1,18 +1,13 @@
 ﻿namespace ExerciciosTDD.Domain
 {
-    public class Gato : IPet
+    public class Gato : Animal, IPet
     {
-        public string Nome { get; set; }
-        public Sexo Sexo { get; set; }
-        public string Foto { get; set; }
-        public Dono Dono { get; set; }
-
-        public string quantoDevoComer(int pesoKg)
+        public override string QuantoDevoComer(int pesoKg)
         {
             throw new NotImplementedException();
         }
 
-        public void validar()
+        public override void Validar()
         {
             throw new NotImplementedException();
         }

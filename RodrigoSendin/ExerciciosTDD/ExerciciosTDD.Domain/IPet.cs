@@ -12,8 +12,8 @@ namespace ExerciciosTDD.Domain
         string Foto { get; set; }
         Dono Dono { get; set; }
 
-        string quantoDevoComer(int pesoKg);
-        void validar();
+        string QuantoDevoComer(int pesoKg);
+        void Validar();
 
     }
 }

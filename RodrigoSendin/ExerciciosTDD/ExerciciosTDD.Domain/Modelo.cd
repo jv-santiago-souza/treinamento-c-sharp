@@ -13,24 +13,18 @@
   <Class Name="ExerciciosTDD.Domain.Gato">
     <Position X="3.25" Y="2.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAEAAAAAAAAAggAAAAABAAAAAAAAAAAAQAEAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAIAAAAAAQAAAAAAAAAAAAA=</HashCode>
       <FileName>Gato.cs</FileName>
     </TypeIdentifier>
-    <ShowAsAssociation>
-      <Property Name="Sexo" />
-      <Property Name="Dono" />
-    </ShowAsAssociation>
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="ExerciciosTDD.Domain.Cachorro">
     <Position X="7" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>BCTAAAEAAABAQAAAggAgAAIBAAIAUQQAAAAAQAEAAAA=</HashCode>
+      <HashCode>BCTAAAAAAABAQAAAAgAgAAIBAAIAUQQAAAAAAAAAAAA=</HashCode>
       <FileName>Cachorro.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
-      <Property Name="Dono" />
-      <Property Name="Sexo" />
       <Property Name="Raca" />
     </ShowAsAssociation>
     <Lollipop Position="0.2" />
@@ -55,11 +49,10 @@
   <Interface Name="ExerciciosTDD.Domain.IPet">
     <Position X="0.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAEAAAAAAAAAggAAAAABAAAAAAAAAAAAQAEAAAA=</HashCode>
+      <HashCode>AAAAAAEAAAAAAAAAAgAAAAAAAAAAAQAAAAAAQAEAAAA=</HashCode>
       <FileName>IPet.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
-      <Property Name="Sexo" />
       <Property Name="Dono" />
     </ShowAsAssociation>
   </Interface>

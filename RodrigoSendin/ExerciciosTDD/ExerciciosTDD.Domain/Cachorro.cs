@@ -2,11 +2,11 @@
 
 namespace ExerciciosTDD.Domain
 {
-    public class Cachorro : IPet
+    public class Cachorro : Animal, IPet
     {
         #region Nome
 
-        public string? Nome { set; get; }
+        // public string? Nome { set; get; } --- Ocultado pois herdado de Animal
 
         //public void setNome(string nome)
         //{
@@ -21,7 +21,7 @@ namespace ExerciciosTDD.Domain
 
         #region Sexo
 
-        public Sexo Sexo { set; get; }
+        //public Sexo Sexo { set; get; } --- Ocultado pois herdado de Animal
 
         //public void setSexo(string sexo)
         //{
@@ -77,7 +77,7 @@ namespace ExerciciosTDD.Domain
 
         public string? DataNascimento { set; get; }
 
-        public Dono? Dono { set; get; }
+        // public Dono? Dono { set; get; } --- Ocultado pois herdado de Animal
 
         #region Peso
 
@@ -98,7 +98,7 @@ namespace ExerciciosTDD.Domain
 
         public string? Vacinado { set; get; }
 
-        public string Foto { get; set; }
+        // public string Foto { get; set; } --- Ocultado pois herdado de Animal
 
         public void setVacinado(bool vacinado)
         {
@@ -127,7 +127,7 @@ namespace ExerciciosTDD.Domain
             return builder.ToString();
         }
 
-        public string QuantoDevoComer(int pesoKg) // Método para 5% do peso (em kg) do cachorro em gramas de ração por dia
+        public override string QuantoDevoComer(int pesoKg) // Método para 5% do peso (em kg) do cachorro em gramas de ração por dia
         {
             return $"como tenho {pesoKg}kg, devo comer {pesoKg * 50}g por dia"; // 50g por kg(1000 * 5%);
         }
@@ -171,7 +171,7 @@ namespace ExerciciosTDD.Domain
             }
         }
 
-        public void Validar()
+        public override void Validar()
         {
             var mensagens = new List<string>();
 
