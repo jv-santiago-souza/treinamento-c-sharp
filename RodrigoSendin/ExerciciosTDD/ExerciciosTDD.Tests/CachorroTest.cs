@@ -160,7 +160,7 @@ namespace ExerciciosTDD.Tests
         }
 
         [TestMethod]
-        public void Cachorro_Validar_Test()
+        public void Validar_Test()
         {
             try
             {

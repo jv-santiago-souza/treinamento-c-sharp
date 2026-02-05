@@ -173,13 +173,17 @@ namespace ExerciciosTDD.Domain
 
         public override void Validar()
         {
-            var mensagens = new List<string>();
+             var mensagens = new List<string>();
 
-            if (string.IsNullOrWhiteSpace(Nome)) // Verificação do nome vazio
-                mensagens.Add("Inserir o nome do cachorro é obrigatório.");
-
-            if (Sexo != Sexo.Macho && Sexo != Sexo.Femea) // Verificação do sexo
-                mensagens.Add("Sexo do cachorro deve ser Macho ou Fêmea.");
+            try
+            {
+                base.Validar(); // Chama a validação da classe pai (Animal)
+            }
+            catch (Exception ex)
+            {
+                var parentMessages = ex.Message.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+                mensagens.AddRange(parentMessages);
+            }
 
             if (string.IsNullOrWhiteSpace(DataNascimento) || !DateTime.TryParse(DataNascimento, out var dataNascimentoParsed)) // Verificação da data de nascimento
             {
@@ -195,9 +199,7 @@ namespace ExerciciosTDD.Domain
 
             if (mensagens.Count > 0)
             {
-                var exceptionMessage = "";
-                foreach (var msg in mensagens)
-                    exceptionMessage += msg + Environment.NewLine;
+                var exceptionMessage = string.Join(Environment.NewLine, mensagens);
 
                 throw new Exception(exceptionMessage.Trim());
             }
