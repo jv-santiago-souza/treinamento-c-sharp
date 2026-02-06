@@ -27,7 +27,7 @@ namespace ExerciciosTDD.Tests
             Assert.HasCount(2, lucindo.Pets);
 
             foreach (var pet in lucindo.Pets)
-                Console.WriteLine(pet.Nome);
+                Console.WriteLine($"{pet.GetTipo()}: {pet.Nome}");
 
             // Verificações sobre dono
             Assert.AreEqual(lucindo, lucio.Dono);
@@ -73,7 +73,7 @@ namespace ExerciciosTDD.Tests
             Assert.HasCount(2, lucindo.Pets);
 
             foreach (var pet in lucindo.Pets)
-                Console.WriteLine(pet.Nome);
+                Console.WriteLine($"{pet.GetTipo()}: {pet.Nome}");
 
             // Verificações sobre dono
             Assert.AreEqual(lucindo, lucio.Dono);

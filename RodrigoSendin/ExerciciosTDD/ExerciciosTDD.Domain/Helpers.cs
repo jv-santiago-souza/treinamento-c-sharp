@@ -4,9 +4,9 @@ using System.Text;
 
 namespace ExerciciosTDD.Domain
 {
-    public static class Helpers
+    public static class ListExtensions
     {
-        public static Exception? ConvertStringListToException(List<string> mensagens)
+        public static Exception? ToException(this List<string> mensagens)
         {
             if (mensagens == null || mensagens.Count == 0) return null;
 

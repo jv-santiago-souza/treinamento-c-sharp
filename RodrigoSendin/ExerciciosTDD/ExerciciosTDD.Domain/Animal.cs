@@ -29,7 +29,7 @@ namespace ExerciciosTDD.Domain
 
             ValidarEspecifico(mensagens);
 
-            var ex = Helpers.ConvertStringListToException(mensagens);
+            var ex = mensagens.ToException(); // Extensão (nossa) que permite acessar de dentro do List
 
             if (ex != null)
                 throw ex; 
