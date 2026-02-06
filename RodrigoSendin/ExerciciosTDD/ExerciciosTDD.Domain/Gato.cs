@@ -1,9 +1,12 @@
 ﻿using System.Text;
+using static ExerciciosTDD.Domain.Especie;
 
 namespace ExerciciosTDD.Domain
 {
     public class Gato : Animal, IPet
     {
+        protected override EspecieAnimal Especie => EspecieAnimal.Gato;
+
         public string Miar(short qtdeMiados)
         {
             if (qtdeMiados <= 0) return string.Empty;
@@ -19,20 +22,10 @@ namespace ExerciciosTDD.Domain
             return builder.ToString();
         }
 
-        public override void Validar()
+        public override string QuantoDevoComer()
         {
-            var mensagens = new List<string>();
-            if (string.IsNullOrWhiteSpace(Nome)) // Verificação do nome vazio
-                mensagens.Add("Inserir o nome do gato é obrigatório.");
-            if (Sexo != Sexo.Macho && Sexo != Sexo.Femea) // Verificação do sexo
-                mensagens.Add("Sexo do gato deve ser Macho ou Fêmea.");
-            if (mensagens.Count > 0)
-            {
-                var exceptionMessage = "";
-                foreach (var msg in mensagens)
-                    exceptionMessage += msg + Environment.NewLine;
-                throw new Exception(exceptionMessage.Trim());
-            }
+            return $"como tenho {Peso}kg, devo comer {Peso * 50}g por dia";
         }
+        protected override void ValidarEspecifico(List<string> erros) { }
     }
 }

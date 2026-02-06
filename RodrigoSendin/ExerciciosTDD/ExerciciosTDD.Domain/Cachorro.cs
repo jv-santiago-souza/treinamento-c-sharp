@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using static ExerciciosTDD.Domain.Especie;
 
 namespace ExerciciosTDD.Domain
 {
@@ -75,23 +76,19 @@ namespace ExerciciosTDD.Domain
         //private string _porte;
         #endregion
 
-        public string? DataNascimento { set; get; }
-
-        // public Dono? Dono { set; get; } --- Ocultado pois herdado de Animal
-
         #region Peso
 
-        public double Peso { set; get; }
+        // public double Peso { set; get; } --- Ocultado pois herdado de Animal
 
-        public void setPeso(double peso)
-        {
-            _peso = peso;
-        }
-        public double getPeso()
-        {
-            return _peso;
-        }
-        private double _peso;
+        //public void setPeso(double peso)
+        //{
+        //    _peso = peso;
+        //}
+        //public double getPeso()
+        //{
+        //    return _peso;
+        //}
+        //private double _peso;
         #endregion
 
         #region Vacinado
@@ -111,6 +108,11 @@ namespace ExerciciosTDD.Domain
         private bool _vacinado;
         #endregion
 
+        public DateTime DataNascimento { set; get; }
+
+        protected override EspecieAnimal Especie => EspecieAnimal.Cachorro;
+
+        // public Dono? Dono { set; get; } --- Ocultado pois herdado de Animal
 
         public string Latir(short qtdeLatidos)
         {
@@ -127,9 +129,9 @@ namespace ExerciciosTDD.Domain
             return builder.ToString();
         }
 
-        public override string QuantoDevoComer(int pesoKg) // Método para 5% do peso (em kg) do cachorro em gramas de ração por dia
+        public override string QuantoDevoComer() // Use instance Peso instead of parameter
         {
-            return $"como tenho {pesoKg}kg, devo comer {pesoKg * 50}g por dia"; // 50g por kg(1000 * 5%);
+            return $"como tenho {Peso}kg, devo comer {Peso * 50}g por dia"; // 50g por kg(1000 * 5%);
         }
 
         public static string IdadeCachorro(string dataNascimento)
@@ -147,72 +149,19 @@ namespace ExerciciosTDD.Domain
             // Se o dia do mês atual for menor que o dia de nascimento, ainda não completou o mês
             if (dataAtual.Day < dataNascConvertido.Day) mesesTotais--;
 
-            if (mesesTotais < 12)
-
-                if (mesesTotais == 0)
-                {
-                    return "Tenho menos de 1 mês";
-                }
-                else
-
-                {
-                    return mesesTotais == 1 ? "Tenho 1 mês" : $"Tenho {mesesTotais} meses";
-                }
+            if (mesesTotais < 12) 
+                return mesesTotais == 0 ? "Tenho menos de 1 mês" : mesesTotais == 1 ? "Tenho 1 mês" : $"Tenho {mesesTotais} meses";
 
             int anos = mesesTotais / 12;
 
-            if (anos == 1)
-            {
-                return $"Tenho {anos} ano";
-            }
-            else
-            {
-                return $"Tenho {anos} anos";
-            }
+            return anos == 1 ? $"Tenho {anos} ano" : $"Tenho {anos} anos";
         }
 
-        public override void Validar()
+        protected override void ValidarEspecifico(List<string> erros)
         {
-             var mensagens = new List<string>();
+            if (DataNascimento == default) erros.Add("Data de nascimento é obrigatória.");
 
-            try
-            {
-                base.Validar(); // Chama a validação da classe pai (Animal)
-            }
-            catch (Exception ex)
-            {
-                var parentMessages = ex.Message.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
-                mensagens.AddRange(parentMessages);
-            }
-
-            if (string.IsNullOrWhiteSpace(DataNascimento) || !DateTime.TryParse(DataNascimento, out var dataNascimentoParsed)) // Verificação da data de nascimento
-            {
-                mensagens.Add("A data de nascimento do cachorro é obrigatória e deve ser uma data válida.");
-            }
-            else if (dataNascimentoParsed > DateTime.Today) // Verificação da data de nascimento
-            {
-                mensagens.Add("A data de nascimento do cachorro não pode ser no futuro.");
-            }
-
-            if (Peso <= 0) // Verificação do peso
-                mensagens.Add("O peso não pode ser menor ou igual a zero.");
-
-            if (mensagens.Count > 0)
-            {
-                var exceptionMessage = string.Join(Environment.NewLine, mensagens);
-
-                throw new Exception(exceptionMessage.Trim());
-            }
-        }
-
-        public string quantoDevoComer(int pesoKg)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void validar()
-        {
-            throw new NotImplementedException();
+            if (DataNascimento > DateTime.Today) erros.Add("A data de nascimento do cachorro não pode ser no futuro.");
         }
     }
 }

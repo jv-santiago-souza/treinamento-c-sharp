@@ -17,29 +17,20 @@ namespace ExerciciosTDD.Tests
         }
 
         [TestMethod]
-        public void Validar_Test()
+        public void Validar_Gato_DeveRetornarTodosOsErros()
         {
-            try
+            var gato = new Gato
             {
-                var sexoInvalido = (Sexo)(Enum.GetValues(typeof(Sexo)).Cast<int>().Max() + 1);
+                Nome = " ",
+                Sexo = (Sexo)99,
+                Peso = -1
+            };
 
-                Gato gato= new()
-                {
-                    Sexo = sexoInvalido,
-                };
+            var ex = Assert.Throws<Exception>(() => gato.Validar());
 
-                gato.Validar();
-
-                Assert.Fail();
-            }
-            catch (Exception ex)
-            {
-                var ok = ex.Message.Contains("Inserir o nome do gato é obrigatório.") &&
-                         ex.Message.Contains("Sexo do gato deve ser Macho ou Fêmea.");
-
-                Assert.IsTrue(ok);
-                Console.WriteLine(ex.Message);
-            }
+            Assert.Contains("O nome do gato é obrigatório.", ex.Message);
+            Assert.Contains("O sexo do animal gato deve ser Macho ou Fêmea", ex.Message);
+            Assert.Contains("Peso deve ser maior que zero.", ex.Message);
         }
     }
 }

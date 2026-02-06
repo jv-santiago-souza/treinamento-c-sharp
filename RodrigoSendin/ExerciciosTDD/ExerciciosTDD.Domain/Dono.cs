@@ -2,11 +2,11 @@
 {
     public class Dono
     {
-        public string Nome { get; set; }
-        public string Telefone { get; set; }
-        public string Email { get; set; }
+        public string Nome { get; set; } = string.Empty;
+        public string Telefone { get; set; } = string.Empty;
+        public string Email { get; set; } = string.Empty;
 
-        public List<IPet> Pets { get; set; } // Associação 1:N (um dono pode ter vários * pets *)
+        public List<IPet> Pets { get; set; } = null!; // Associação 1:N (um dono pode ter vários * pets *)
 
         public void AddPet(IPet pet)
         {
@@ -32,7 +32,7 @@
                 return;
 
             if (Pets.Remove(pet))
-                pet.Dono = null; // Remove a relação bidirecional
+                pet.Dono = null!; // Remove a relação bidirecional
         }
 
         public void RemovePet(params IPet[] pets)

@@ -1,35 +1,40 @@
-﻿namespace ExerciciosTDD.Domain
+﻿using static ExerciciosTDD.Domain.Especie;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+
+namespace ExerciciosTDD.Domain
 {
-    public class Animal
+    public abstract class Animal
     {
-        public string Nome { get; set; }
+        public string Nome { get; set; } = string.Empty;
         public Sexo Sexo { get; set; }
-        public string Foto { get; set; }
-        public Dono Dono { get; set; }
+        public string Foto { get; set; } = string.Empty;
+        public Dono Dono { get; set; } = null!;
+        public double Peso { get; set; }
 
-        public virtual string QuantoDevoComer(int pesoKg)
-        {
-            throw new NotImplementedException();
-        }
+        protected abstract EspecieAnimal Especie { get; } // ENUM
 
-        public virtual void Validar() // Virtual serve para permitir override nas classes filhas
+        public abstract string QuantoDevoComer(); // Quem herdar de animal, obrigatoriamente tem que implementar o método QuantoDevoComer, pois é abstrato
+
+        // abstract serve para obrigar as classes filhas a implementarem o método, ou seja, não tem implementação na classe pai, só na filha
+        // Já o virtual tem uma implementação na classe pai, mas pode ser sobrescrito (override) nas classes filhas.
+
+        public void Validar()
         {
             var mensagens = new List<string>();
 
-            if (string.IsNullOrWhiteSpace(Nome)) // Verificação do nome vazio
-                mensagens.Add("Inserir o nome do cachorro é obrigatório.");
+            // Regras comuns a todos os animais
+            if (string.IsNullOrWhiteSpace(Nome)) mensagens.Add($"O nome do {Especie.ToString().ToLower()} é obrigatório.");
+            if (Peso <= 0) mensagens.Add("Peso deve ser maior que zero.");
+            if (Sexo != Sexo.Macho && Sexo != Sexo.Femea) mensagens.Add($"O sexo do animal {Especie.ToString().ToLower()} deve ser Macho ou Fêmea");
 
-            if (Sexo != Sexo.Macho && Sexo != Sexo.Femea) // Verificação do sexo
-                mensagens.Add("Sexo do cachorro deve ser Macho ou Fêmea.");
+            ValidarEspecifico(mensagens);
 
+            // Se houver erros, lança a exceção uma vez só com todas as mensagens
             if (mensagens.Count > 0)
-            {
-                var exceptionMessage = "";
-                foreach (var msg in mensagens)
-                    exceptionMessage += msg + Environment.NewLine;
-
-                throw new Exception(exceptionMessage.Trim());
-            }
+                throw new Exception(string.Join(Environment.NewLine, mensagens));
         }
+
+        // Cada filha é obrigada a implementar sua regra extra
+        protected abstract void ValidarEspecifico(List<string> erros);
     }
 }

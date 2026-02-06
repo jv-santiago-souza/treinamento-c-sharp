@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using ExerciciosTDD.Domain;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ExerciciosTDD.Tests
 {
@@ -20,8 +21,8 @@ namespace ExerciciosTDD.Tests
         [TestMethod]
         public void Belinha_QuantoDevoComer_Test()
         {
-            Cachorro belinha = new Cachorro();
-            var quantoDevoComer = belinha.QuantoDevoComer(1);
+            Cachorro belinha = new Cachorro() { Peso = 1 };
+            var quantoDevoComer = belinha.QuantoDevoComer();
 
             Console.WriteLine(quantoDevoComer);
 
@@ -31,8 +32,8 @@ namespace ExerciciosTDD.Tests
         [TestMethod]
         public void Yuri_QuantoDevoComer_Test()
         {
-            Cachorro yuri = new Cachorro();
-            var quantoDevoComer = yuri.QuantoDevoComer(15);
+            Cachorro yuri = new Cachorro() { Peso = 15};
+            var quantoDevoComer = yuri.QuantoDevoComer();
 
             Console.WriteLine(quantoDevoComer);
 
@@ -42,8 +43,8 @@ namespace ExerciciosTDD.Tests
         [TestMethod]
         public void Tequila_QuantoDevoComer_Test()
         {
-            Cachorro tequila = new Cachorro();
-            var quantoDevoComer = tequila.QuantoDevoComer(30);
+            Cachorro tequila = new Cachorro() { Peso = 30 };
+            var quantoDevoComer = tequila.QuantoDevoComer();
 
             Console.WriteLine(quantoDevoComer);
 
@@ -120,7 +121,7 @@ namespace ExerciciosTDD.Tests
         {
             Cachorro yuri = new Cachorro();
 
-            yuri.DataNascimento = "";
+            yuri.DataNascimento = DateTime.Today.AddYears(-5);
             var idade = yuri.DataNascimento;
         }
 
@@ -129,9 +130,9 @@ namespace ExerciciosTDD.Tests
         {
             Cachorro yuri = new Cachorro();
 
-            yuri.setPeso(15);
-            var peso = yuri.getPeso();
-
+            yuri.Peso = 15;
+            var peso = yuri.Peso;
+ 
             Console.WriteLine(peso);
 
             Assert.AreEqual(15, peso);
@@ -160,33 +161,22 @@ namespace ExerciciosTDD.Tests
         }
 
         [TestMethod]
-        public void Validar_Test()
+        public void Validar_Cachorro_DeveRetornarTodosOsErros()
         {
-            try
+            var cachorro = new Cachorro
             {
-                var sexoInvalido = (Sexo)(Enum.GetValues(typeof(Sexo)).Cast<int>().Max() + 1);
+                Nome = null!,
+                Sexo = (Sexo)99,
+                DataNascimento = DateTime.Today.AddDays(1),
+                Peso = 0
+            };
 
-                Cachorro cachorro = new()
-                {
-                    Sexo = sexoInvalido,
-                    DataNascimento = DateTime.Today.AddMonths(1).ToString("dd/MM/yyyy"),
-                    Peso = 0
-                };
+            var ex = Assert.Throws<Exception>(() => cachorro.Validar());
 
-                cachorro.Validar();
-
-                Assert.Fail();
-            }
-            catch (Exception ex)
-            {
-                var ok = ex.Message.Contains("Inserir o nome do cachorro é obrigatório.") &&
-                         ex.Message.Contains("Sexo do cachorro deve ser Macho ou Fêmea.") &&
-                         ex.Message.Contains("A data de nascimento do cachorro não pode ser no futuro.") &&
-                         ex.Message.Contains("O peso não pode ser menor ou igual a zero.");
-
-                Assert.IsTrue(ok);
-                Console.WriteLine(ex.Message);
-            }
+            Assert.Contains("O nome do cachorro é obrigatório.", ex.Message);
+            Assert.Contains("O sexo do animal cachorro deve ser Macho ou Fêmea", ex.Message);
+            Assert.Contains("A data de nascimento do cachorro não pode ser no futuro.", ex.Message);
+            Assert.Contains("Peso deve ser maior que zero.", ex.Message);
         }
 
         [TestMethod]

@@ -245,6 +245,14 @@ namespace ExerciciosTDD.Tests
                 Console.WriteLine("Mensagem enviado pela finally. Aparece mesmo que ocorra uma Exception");
             }
         }
+
+        [TestMethod]
+        public void Classe_Abstrata_Test()
+        {
+            // var animal = new Animal();
+
+
+        }
     }
 }
  
