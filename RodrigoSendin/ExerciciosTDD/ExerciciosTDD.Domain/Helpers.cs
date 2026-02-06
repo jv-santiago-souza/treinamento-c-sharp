@@ -8,11 +8,11 @@ namespace ExerciciosTDD.Domain
     {
         public static Exception? ConvertStringListToException(List<string> mensagens)
         {
-            var exceptionMessage = "";
-            foreach (var msg in mensagens)
-                exceptionMessage += msg + Environment.NewLine;
+            if (mensagens == null || mensagens.Count == 0) return null;
 
-            return string.IsNullOrWhiteSpace(exceptionMessage) ? null : new Exception(exceptionMessage.Trim());
+            var exceptionMessage = string.Join(Environment.NewLine, mensagens);
+
+            return new Exception(exceptionMessage.Trim());
         }
     }
 }

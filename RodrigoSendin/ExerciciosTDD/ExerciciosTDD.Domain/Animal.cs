@@ -29,9 +29,10 @@ namespace ExerciciosTDD.Domain
 
             ValidarEspecifico(mensagens);
 
-            // Se houver erros, lança a exceção uma vez só com todas as mensagens
-            if (mensagens.Count > 0)
-                throw new Exception(string.Join(Environment.NewLine, mensagens));
+            var ex = Helpers.ConvertStringListToException(mensagens);
+
+            if (ex != null)
+                throw ex; 
         }
 
         // Cada filha é obrigada a implementar sua regra extra

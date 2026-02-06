@@ -249,8 +249,7 @@ namespace ExerciciosTDD.Tests
         [TestMethod]
         public void Classe_Abstrata_Test()
         {
-            // var animal = new Animal();
-
+            // var animal = new Animal(); // Não é possível instanciar uma classe abstrata
 
         }
     }
