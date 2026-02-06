@@ -11,6 +11,7 @@ namespace ExerciciosTDD.Domain
         Sexo Sexo { get; set; }
         string Foto { get; set; }
         Dono Dono { get; set; }
+        double Peso { get; set; }
 
         string QuantoDevoComer();
         void Validar();

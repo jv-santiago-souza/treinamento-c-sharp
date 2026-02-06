@@ -1,11 +1,26 @@
-﻿using System.IO;
+﻿using System.Linq;
+using System.IO;
 using ExerciciosTDD.Domain;
+using System.Runtime.InteropServices;
 
 namespace ExerciciosTDD.Tests
 {
     [TestClass]
     public sealed class HelloWorldTest
     {
+        private static List<IPet> _pets;
+
+        [ClassInitialize]
+        public static void Setup(TestContext context)
+        {
+            _pets = HelloWorld.Ler_Pets_Do_Arquivo("C:\\TesteAula030\\Outra Pasta\\pets.csv");
+        }
+        private static void ImprimePets(IEnumerable<IPet> pets)
+        {
+            foreach (var pet in pets)
+                Console.WriteLine($"[{pet.GetTipo()}] {pet.Nome} - {pet.Dono}");
+        }
+
         [TestMethod]
         public void SayHello_Test()
         {
@@ -218,10 +233,10 @@ namespace ExerciciosTDD.Tests
         {
             try
             {
-                MinhaClasse obj = null;
+                MinhaClasse obj = null!;
                 // obj.OutroMetodo();
 
-                if(obj == null)
+                if (obj == null)
                 {
                     throw new Exception("O objeto não foi instanciado"); // Força a exceção
                 }
@@ -260,11 +275,11 @@ namespace ExerciciosTDD.Tests
             Directory.CreateDirectory("C:\\TesteAula030\\Outra Pasta");
         }
 
-        [TestMethod]
-        public void SystemIO_CreateFile_Txt_Test()
-        {
-            File.WriteAllText("C:\\TesteAula030\\Outra Pasta\\Hello.txt", "Cogumelo cabeçudo");
-        }
+        //[TestMethod]
+        //public void SystemIO_CreateFile_Txt_Test()
+        //{
+        //    File.WriteAllText("C:\\TesteAula030\\Outra Pasta\\Hello.txt", "Cogumelo cabeçudo");
+        //}
 
         [TestMethod]
         public void SystemIO_GetFileSystemEntries_Test()
@@ -318,6 +333,153 @@ namespace ExerciciosTDD.Tests
             }
 
             Assert.IsNotEmpty(listaDePets, "A lista não deveria estar vazia!");
+        }
+
+        [TestMethod]
+        public void Linq_Test()
+        {
+            var query = from pet in _pets
+                        where pet.GetTipo() == "Gato"
+                        select pet;
+
+            ImprimePets(query);
+        }
+
+        [TestMethod]
+        public void Linq_Metodo_Test()
+        {
+            var query = _pets.Where(pet => pet.GetTipo() == "Gato");
+        }
+
+        [TestMethod]
+        public void Linq_Order_Test()
+        {
+            var query = from pet in _pets
+                        where pet.GetTipo() == "Gato"
+                        orderby pet.Nome
+                        select pet;
+
+            ImprimePets(query);
+        }
+
+        [TestMethod]
+        public void Linq_Order_Metodo_Test()
+        {
+            var query = _pets.Where(pet => pet.GetTipo() == "Gato")
+                              .OrderByDescending(pet => pet.Nome);
+            ImprimePets(query);
+        }
+
+        [TestMethod]
+        public void Linq_Projecao_Test()
+        {
+            var query = from pet in _pets
+                        where pet.GetTipo() == "Gato"
+                        orderby pet.Peso
+                        select new { Nome = pet.Nome, Peso = pet.Peso };
+
+            foreach (var pet in query)
+                Console.WriteLine($"{pet.Nome} - {pet.Peso}kg");
+        }
+
+        [TestMethod]
+        public void Linq_Projecao_Metodo_Test()
+        {
+            var query = _pets.Where(pet => pet.GetTipo() == "Cachorro")
+                              .OrderByDescending(pet => pet.Peso).
+                              Select(pet => new { pet.Nome, pet.Peso });
+
+            foreach (var pet in query)
+                Console.WriteLine($"{pet.Nome} - {pet.Peso}kg");
+        }
+
+        [TestMethod]
+        public void Linq_Skip_Take_Test()
+        {
+            var query = (from pet in _pets
+                         where pet.GetTipo() == "Gato"
+                         orderby pet.Peso
+                         select new { Nome = pet.Nome, Peso = pet.Peso }).Skip(3).Take(3);
+
+            foreach (var pet in query)
+                Console.WriteLine($"{pet.Nome} - {pet.Peso}kg");
+        }
+
+        [TestMethod]
+        public void Linq_First_Last_Test()
+        {
+            var query = from pet in _pets
+                        where pet.GetTipo() == "Gato"
+                        orderby pet.Peso
+                        select new { Nome = pet.Nome, Peso = pet.Peso };
+
+            var primeiro = query.FirstOrDefault();
+            var ultimo = query.FirstOrDefault();
+
+            Console.WriteLine(primeiro.Nome);
+            Console.WriteLine(ultimo.Nome);
+        }
+
+        [TestMethod]
+        public void Linq_Agregacoes_Test()
+        {
+            var query = from pet in _pets
+                        where pet.GetTipo() == "Gato"
+                        orderby pet.Peso
+                        select new { Nome = pet.Nome, Peso = pet.Peso };
+
+            var somaPesosTotal = query.Sum(pet => pet.Peso);
+            Console.WriteLine(somaPesosTotal);
+            var maiorValor = query.Max(pet => pet.Peso);
+            Console.WriteLine(maiorValor);
+            var MenorValor = query.Min(pet => pet.Peso);
+            Console.WriteLine(MenorValor);
+            var media = query.Average(pet => pet.Peso);
+            Console.WriteLine(media);
+        }
+
+        [TestMethod]
+        public void Linq_Group_Test()
+        {
+            var query = from pet in _pets
+                        group pet by pet.Sexo into g
+                        select new { Sexo = g.Key, Total = g.Count() };
+
+            foreach (var pet in query)
+                Console.WriteLine($"{pet.Sexo} - {pet.Total}");
+        }
+
+        [TestMethod]
+        public void Linq_Query_Exercicio_Test()
+        {
+            var query = from pet in _pets
+                        group pet by pet.Dono.Nome into g
+                        orderby g.Key
+                        select new { NomeDono = g.Key, Total = g.Count() };
+
+            var queryCachorro = from pet in _pets
+                        where pet.GetTipo() == "Cachorro"
+                        select new { Nome = pet.Nome, Sexo = pet.Sexo };
+
+            var maisVelho = queryCachorro.FirstOrDefault().Nome;
+            var maisNovo = queryCachorro.LastOrDefault().Nome;
+
+
+            foreach (var item in query)
+                Console.WriteLine($"{item.NomeDono} possui {item.Total} animal(is) em sua tutela.");
+
+            Console.WriteLine($"O cachorro mais velho é o(a) {maisVelho}");
+            Console.WriteLine($"O cachorro mais novo é o(a) {maisNovo}");
+        }
+
+        [TestMethod]
+        public void Async_Await_Tarefa_Test()
+        {
+            var retorno1 = HelloWorld.Tarefa("Um", 5);
+            Console.WriteLine(retorno1);
+
+            var retorno2 = HelloWorld.Tarefa("Dois", 3);
+            Console.WriteLine(retorno2);
         }
     }
 }

@@ -77,5 +77,18 @@
             }
             return listaDePets;
         }
+
+        public static string Tarefa(string tarefa, int passos)
+        {
+            Console.WriteLine($"## Tarefa {tarefa} INICIADA!");
+
+            for (var i = passos; i > 0; i--)
+            {
+                Thread.Sleep(1000);
+                Console.WriteLine($"     >> Tarefa {tarefa} executando... {i}");
+            }
+
+            return $"## Tarefa {tarefa} FINALIZADA!";
+        }
     }
 }
