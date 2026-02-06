@@ -90,5 +90,18 @@
 
             return $"## Tarefa {tarefa} FINALIZADA!";
         }
+
+        public static async Task<string> TarefaAsync(string tarefa, int passos)
+        {
+            Console.WriteLine($"## Tarefa {tarefa} INICIADA!");
+
+            for (var i = passos; i > 0; i--)
+            {
+                await Task.Delay(1000);
+                Console.WriteLine($"     >> Tarefa {tarefa} executando... {i}");
+            }
+
+            return $"## Tarefa {tarefa} FINALIZADA!";
+        }
     }
 }

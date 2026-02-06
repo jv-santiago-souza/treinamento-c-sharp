@@ -481,6 +481,53 @@ namespace ExerciciosTDD.Tests
             var retorno2 = HelloWorld.Tarefa("Dois", 3);
             Console.WriteLine(retorno2);
         }
+
+        [TestMethod]
+        public async Task Async_Await_Tarefa_1_Test()
+        {
+            Task<string> tarefa1 = HelloWorld.TarefaAsync("Um", 5);
+            // Console.WriteLine(tarefa1);
+
+            Task<string> tarefa2 = HelloWorld.TarefaAsync("Dois", 3);
+            // Console.WriteLine(tarefa2);
+
+            Console.WriteLine("Código que pode ser executado de maneira independente ao retorno da tarefa");
+
+            string resultado = await tarefa1;
+
+            Console.WriteLine(resultado);
+        }
+
+        [TestMethod]
+        public async Task Async_Await_Tarefa_2_Test()
+        {
+            Task<string> tarefa1 = HelloWorld.TarefaAsync("Um", 5);
+            Task<string> tarefa2 = HelloWorld.TarefaAsync("Dois", 3);
+
+            string resultado1 = await tarefa1;
+            Console.WriteLine(resultado1);
+
+            string resultado2 = await tarefa2;
+            Console.WriteLine(resultado2);
+        }
+
+        [TestMethod]
+        public async Task Async_Await_Tarefa_3_Test()
+        {
+            Task<string> tarefa1 = HelloWorld.TarefaAsync("Um", 5);
+            Task<string> tarefa2 = HelloWorld.TarefaAsync("Dois", 3);
+
+            string resultado1 = await tarefa1;
+            Console.WriteLine(resultado1);
+
+            Task<string> tarefa3 = HelloWorld.TarefaAsync("Três", 5);
+
+            string resultado2 = await tarefa2;
+            Console.WriteLine(resultado2);
+
+            string resultado3 = await tarefa3;
+            Console.WriteLine(resultado3);
+        }
     }
 }
  
