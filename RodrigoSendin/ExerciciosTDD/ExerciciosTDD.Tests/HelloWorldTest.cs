@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.IO;
 using ExerciciosTDD.Domain;
 
 namespace ExerciciosTDD.Tests
@@ -251,6 +251,73 @@ namespace ExerciciosTDD.Tests
         {
             // var animal = new Animal(); // Não é possível instanciar uma classe abstrata
 
+        }
+
+        [TestMethod]
+        public void SystemIO_CreateDirectory_Test()
+        {
+            Directory.CreateDirectory("C:\\TesteAula030");
+            Directory.CreateDirectory("C:\\TesteAula030\\Outra Pasta");
+        }
+
+        [TestMethod]
+        public void SystemIO_CreateFile_Txt_Test()
+        {
+            File.WriteAllText("C:\\TesteAula030\\Outra Pasta\\Hello.txt", "Cogumelo cabeçudo");
+        }
+
+        [TestMethod]
+        public void SystemIO_GetFileSystemEntries_Test()
+        {
+            var lista = Directory.GetFileSystemEntries("C:\\TesteAula030\\Outra Pasta");
+
+            foreach (var item in lista) Console.WriteLine(item);
+        }
+
+        [TestMethod]
+        public void SystemIO_File_Read_Txt_Test()
+        {
+            var conteudo = File.ReadAllText("C:\\TesteAula030\\Outra Pasta\\Hello.txt");
+            Console.WriteLine(conteudo);
+        }
+
+        [TestMethod]
+        public void SystemIO_Ler_Pets_Do_Arquivo()
+        {
+            string caminho = "C:\\TesteAula030\\Outra Pasta\\pets.csv";
+
+            List<IPet> listaDePets = HelloWorld.Ler_Pets_Do_Arquivo(caminho);
+
+            Console.WriteLine("Listagem dos pets");
+            Console.WriteLine($"Total de pets encontrados: {listaDePets.Count}");
+
+            foreach (IPet pet in listaDePets)
+            {
+                Animal animal = (Animal)pet;
+
+                Console.WriteLine($"\nPET: {animal.Nome}");
+                Console.WriteLine($"Espécie: {animal.GetType().Name}");
+                Console.WriteLine($"Sexo: {animal.Sexo}");
+                Console.WriteLine($"Peso: {animal.Peso}kg");
+                Console.WriteLine($"Dono: {animal.Dono.Nome}");
+
+
+                if (pet is Cachorro cachorro)
+                {
+                    Console.WriteLine($"Data de Nascimento: {cachorro.DataNascimento.ToShortDateString()}");
+
+                    string statusVacina = cachorro.getVacinado() ? "Sim" : "Não";
+                    Console.WriteLine($"Vacinado: {statusVacina}");
+                }
+                else if (pet is Gato gato)
+                {
+                    Console.WriteLine($"- Miou: {gato.Miar(1)}");
+                }
+
+                Console.WriteLine("-------------------------------------------");
+            }
+
+            Assert.IsNotEmpty(listaDePets, "A lista não deveria estar vazia!");
         }
     }
 }
