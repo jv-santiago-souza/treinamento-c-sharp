@@ -7,76 +7,71 @@
             return "Hello, World!";
         }
 
-        public static List<IPet> Ler_Pets_Do_Arquivo(string caminho)
+        public static async Task<List<IPet>> Ler_Pets_Do_ArquivoAsync(string caminho)
         {
-            List<IPet> listaDePets = new List<IPet>();
+            List<IPet> listaDePets = new();
 
-            if (File.Exists(caminho) == false)
+            if (!File.Exists(caminho))
             {
                 throw new Exception("Arquivo não encontrado!");
             }
 
-            using (StreamReader leitor = new(caminho))
+            using StreamReader leitor = new(caminho);
+
+            await leitor.ReadLineAsync(); // Pula o cabeçalho
+
+            while (!leitor.EndOfStream)
             {
-                leitor.ReadLine(); // Pula o cabeçalho
+                string? linha = await leitor.ReadLineAsync();
+                if (string.IsNullOrWhiteSpace(linha)) continue;
 
-                while (leitor.EndOfStream == false)
+                string[] colunas = linha.Split(';');
+
+                string tipo = colunas[0];
+                string nome = colunas[1];
+                string sexoTexto = colunas[2];
+                string donoNome = colunas[3];
+                string pesoTexto = colunas[4];
+                string racaTexto = colunas[5];
+                string porteTexto = colunas[6];
+                string dataNascTexto = colunas[7];
+                string vacinadoTexto = colunas[8];
+
+                if (tipo.Equals("Cachorro", StringComparison.OrdinalIgnoreCase))
                 {
-                    string? linha = leitor.ReadLine();
-                    if (string.IsNullOrEmpty(linha)) continue;
-
-                    string[] colunas = linha.Split(';');
-
-                    string tipo = colunas[0];
-                    string nome = colunas[1];
-                    string sexoTexto = colunas[2];
-                    string donoNome = colunas[3];
-                    string pesoTexto = colunas[4];
-                    string racaTexto = colunas[5];
-                    string porteTexto = colunas[6];
-                    string dataNascTexto = colunas[7];
-                    string vacinadoTexto = colunas[8];
-
-                    if (tipo == "Cachorro" || tipo == "cachorro")
+                    Cachorro cachorro = new()
                     {
-                        Cachorro cachorro = new()
-                        {
-                            Nome = nome,
-                            Peso = Convert.ToDouble(pesoTexto),
-                            Sexo = (sexoTexto == "Macho") ? Sexo.Macho : Sexo.Femea
-                        };
+                        Nome = nome,
+                        Peso = Convert.ToDouble(pesoTexto),
+                        Sexo = (sexoTexto == "Macho") ? Sexo.Macho : Sexo.Femea,
+                        Dono = new Dono { Nome = donoNome },
+                        Raca = new Raca { Nome = racaTexto }
+                    };
 
-                        Dono dono = new() { Nome = donoNome };
+                    if (!string.IsNullOrWhiteSpace(dataNascTexto))
+                        cachorro.DataNascimento = Convert.ToDateTime(dataNascTexto);
 
-                        cachorro.Dono = dono;
-                        cachorro.Raca = new Raca { Nome = racaTexto }; 
+                    cachorro.setVacinado(vacinadoTexto == "sim");
 
-                        if (!string.IsNullOrWhiteSpace(dataNascTexto)) cachorro.DataNascimento = Convert.ToDateTime(dataNascTexto);
-
-                        if (vacinadoTexto == "sim") cachorro.setVacinado(true);
-                        else cachorro.setVacinado(false);
-
-                        listaDePets.Add(cachorro);
-                    }
-                    else if (tipo == "Gato" || tipo == "Gato")
+                    listaDePets.Add(cachorro);
+                }
+                else if (tipo.Equals("Gato", StringComparison.OrdinalIgnoreCase))
+                {
+                    Gato gato = new()
                     {
-                        Gato gato = new()
-                        {
-                            Nome = nome,
-                            Peso = Convert.ToDouble(pesoTexto),
-                            Sexo = (sexoTexto == "Macho") ? Sexo.Macho : Sexo.Femea
-                        };
+                        Nome = nome,
+                        Peso = Convert.ToDouble(pesoTexto),
+                        Sexo = (sexoTexto == "Macho") ? Sexo.Macho : Sexo.Femea,
+                        Dono = new Dono { Nome = donoNome }
+                    };
 
-                        Dono dono = new() { Nome = donoNome };
-
-                        gato.Dono = dono;
-
-                        listaDePets.Add(gato);
-                    }
+                    listaDePets.Add(gato);
                 }
             }
+
             return listaDePets;
         }
+
 
         public static string Tarefa(string tarefa, int passos)
         {

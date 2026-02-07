@@ -13,8 +13,9 @@ namespace ExerciciosTDD.Tests
         [ClassInitialize]
         public static void Setup(TestContext context)
         {
-            _pets = HelloWorld.Ler_Pets_Do_Arquivo("C:\\TesteAula030\\Outra Pasta\\pets.csv");
+            _pets = HelloWorld.Ler_Pets_Do_ArquivoAsync("C:\\TesteAula030\\Outra Pasta\\pets.csv").GetAwaiter().GetResult();
         }
+
         private static void ImprimePets(IEnumerable<IPet> pets)
         {
             foreach (var pet in pets)
@@ -297,11 +298,11 @@ namespace ExerciciosTDD.Tests
         }
 
         [TestMethod]
-        public void SystemIO_Ler_Pets_Do_Arquivo()
+        public async Task SystemIO_Ler_Pets_Do_Arquivo_Test()
         {
             string caminho = "C:\\TesteAula030\\Outra Pasta\\pets.csv";
 
-            List<IPet> listaDePets = HelloWorld.Ler_Pets_Do_Arquivo(caminho);
+            List<IPet> listaDePets = await HelloWorld.Ler_Pets_Do_ArquivoAsync(caminho);
 
             Console.WriteLine("Listagem dos pets");
             Console.WriteLine($"Total de pets encontrados: {listaDePets.Count}");
@@ -315,7 +316,6 @@ namespace ExerciciosTDD.Tests
                 Console.WriteLine($"Sexo: {animal.Sexo}");
                 Console.WriteLine($"Peso: {animal.Peso}kg");
                 Console.WriteLine($"Dono: {animal.Dono.Nome}");
-
 
                 if (pet is Cachorro cachorro)
                 {
